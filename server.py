@@ -15,7 +15,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = 0
 #Configure sqlite3 to enforce foreign key constraints 
 @event.listens_for(Engine, "connect")
 def _set_sqlite_pragma(dbapi_connection, connection_record):
-    if isinstance(dbapi_connection, connection_record):
+    if isinstance(dbapi_connection, SQLiteConnection):
         cursor = dbapi_connection.cursor()
         cursor.execute("PRAGMA foreign_keys=ON;")
         cursor.close()
@@ -23,7 +23,7 @@ def _set_sqlite_pragma(dbapi_connection, connection_record):
 db =  SQLAlchemy(app)
 now = datetime.now()
 
-#Table Models:
+# DB Table Models:
 class User(db.Model):
     """
     USer Table in class form that will be represented in the database..
@@ -32,7 +32,7 @@ class User(db.Model):
         db ([type]): [description]
     """
     __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     email = db.Column(db.String(50))
     address = db.Column(db.String(200))
