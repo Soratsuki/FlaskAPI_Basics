@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from sqlite3 import Connection as SQLiteConnection
-from datetime import datetime
+from datetime import date, datetime
 
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///sqlitedb.file"
-app.config["SQL_TRACK_MODIFICATIONS"] = 0
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = 0
 
 #Configure sqlite3 to enforce foreign key constraints 
 @event.listens_for(Engine, "connect")
@@ -19,7 +19,8 @@ def _set_sqlite_pragma(dbapi_connection, connection_record):
         cursor.execute("PRAGMA foreign_keys=ON;")
         cursor.close()
 
-
+db =  SQLAlchemy(app)
+now = datetime.now()
 #models
 class User(db.Model):
     """
