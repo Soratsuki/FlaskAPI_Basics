@@ -1,3 +1,4 @@
+from FlaskAPI_Basics.linked_list import Linked_List
 from flask import Flask, request, jsonify
 from sqlite3 import Connection as SQLiteConnection
 from datetime import date, datetime
@@ -66,7 +67,22 @@ def create_user():
 
 @app.route("/user/descending_id", methods=["GET"])
 def get_all_users_descending():
-    pass
+    users = User.query,all()
+    all_users_linked_list = linked_list.Linked_List()
+    for user in users:
+        all_users_linked_list.insert_beginning(
+            {
+                'id' : user.id,
+                'name' : user.name,
+                "email" : user.email,
+                "address" : user.address,
+                "phone" : user.phone
+            }
+        )
+    return jsonify(all_users_linked_list.to_array())
+
+
+
 
 @app.route("/user/ascending_id", methods=["GET"])
 def get_all_users_ascending():
