@@ -43,10 +43,11 @@ class Linked_List:
             while node.next_node:
                 #to reach the end of the linked list
                 node = node.next_node
-
-        node.next_node = Node(data,None)
-        self.last_node = node.next_node
-
+            node.next_node = Node(data,None)
+            self.last_node = node.next_node
+        
+        else:
+            self.last_node.next_node = Node(data,None)
 
 
 ll = Linked_List()
