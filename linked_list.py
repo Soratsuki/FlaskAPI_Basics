@@ -52,17 +52,16 @@ class Linked_List:
         self.last_node = self.last_node.next_node
 
 
-ll = Linked_List()
+# ll = Linked_List()
 
-node4 = Node("data4", None)
-node3 = Node("data3", node4)
-node2 = Node("data2", node3)
-node1 = Node("data1", node2)
-#ll.last_node = node4
-ll.head = node1
-ll.insert_beginning(50)
-ll.insert_beginning(150)
-ll.insert_at_end(400)
-ll.insert_at_end(300)
-print(ll)
-
+# node4 = Node("data4", None)
+# node3 = Node("data3", node4)
+# node2 = Node("data2", node3)
+# node1 = Node("data1", node2)
+# #ll.last_node = node4
+# ll.head = node1
+# ll.insert_beginning(50)
+# ll.insert_beginning(150)
+# ll.insert_at_end(400)
+# ll.insert_at_end(300)
+# #print(ll)
