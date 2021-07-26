@@ -67,9 +67,10 @@ def create_user():
 
 @app.route("/user/descending_id", methods=["GET"])
 def get_all_users_descending():
-    users = User.query,all()
+    users = User.query.all() #gives us users by id in ascending
     all_users_linked_list = linked_list.Linked_List()
     for user in users:
+        #each time a user is added they are set as the head of the linked list so it reverses the order of the original query
         all_users_linked_list.insert_beginning(
             {
                 'id' : user.id,
@@ -79,7 +80,7 @@ def get_all_users_descending():
                 "phone" : user.phone
             }
         )
-    return jsonify(all_users_linked_list.to_array())
+    return jsonify(all_users_linked_list.to_array()), 200
 
 
 
