@@ -38,7 +38,8 @@ class User(db.Model):
     email = db.Column(db.String(50))
     address = db.Column(db.String(200))
     phone = db.Column(db.String(50))
-    posts = db.relationship("BlogPost") #Relationship to another table called BlogPost
+    #Whenever a user is deleted, any item in the Blog Post table that reference that ID will also be deleted 
+    posts = db.relationship("BlogPost", cascade= "all, delete") #Relationship to another table called BlogPost
 
 
 class BlogPost(db.Model):
