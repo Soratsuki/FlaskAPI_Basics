@@ -86,7 +86,20 @@ def get_all_users_descending():
 
 @app.route("/user/ascending_id", methods=["GET"])
 def get_all_users_ascending():
-    pass
+    users = User.query.all() #gives us users by id in ascending
+    all_users_linked_list = linked_list.Linked_List()
+    for user in users:
+        #each time a user is added they are set as the head of the linked list so it reverses the order of the original query
+        all_users_linked_list.insert_at_end(
+            {
+                'id' : user.id,
+                'name' : user.name,
+                "email" : user.email,
+                "address" : user.address,
+                "phone" : user.phone
+            }
+        )
+    return jsonify(all_users_linked_list.to_array()), 200
 
 @app.route("/user/<user_id>", methods=["GET"])
 def get_one_user(user_id):
