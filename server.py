@@ -1,4 +1,3 @@
-from FlaskAPI_Basics.linked_list import Linked_List
 from flask import Flask, request, jsonify
 from sqlite3 import Connection as SQLiteConnection
 from datetime import date, datetime
