@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, json, request, jsonify
 from sqlite3 import Connection as SQLiteConnection
 from datetime import date, datetime
 
@@ -103,7 +103,23 @@ def get_all_users_ascending():
 
 @app.route("/user/<user_id>", methods=["GET"])
 def get_one_user(user_id):
-    pass
+    users = User.query.all()
+
+    all_users_linked_list = linked_list.Linked_List()
+
+    for user in users:
+        all_users_linked_list.insert_beginning(
+            {
+                'id' : user.id,
+                'name' : user.name,
+                "email" : user.email,
+                "address" : user.address,
+                "phone" : user.phone
+            }
+        )
+
+    user = all_users_linked_list.get_user_by_id(user_id)    
+    return jsonify(user), 200    
 
 @app.route("/user/<user_id>", methods=["DELETE"])
 def delete_user(user_id):
