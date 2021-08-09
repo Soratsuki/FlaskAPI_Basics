@@ -6,6 +6,7 @@ from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from flask_sqlalchemy import SQLAlchemy
 import linked_list
+import hash_table
 
 #app
 app = Flask(__name__)
@@ -132,7 +133,20 @@ def delete_user(user_id):
 
 @app.route("/blog_post/<user_id>", methods=["POST"])
 def create_blog_post(user_id):
-    pass
+    data = request.get_json()
+
+    user = User.query.filter_by(id = user_id).first()
+    if not user:
+        return jsonify({"message ": "user does not exist"}), 400
+    
+    hash_tb = hash_table.Hash_Table(10)
+
+    hash_tb.add_key_value("title", data["title"])
+    hash_tb.add_key_value("body", data["body"])
+    hash_tb.add_key_value("date", now)
+    hash_tb.add_key_value("user_id", user_id)
+
+    print(hash_tb)
 
 @app.route("/blog_post/<user_id>", methods=["GET"])
 def get_all_blog_posts(user_id):
