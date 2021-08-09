@@ -45,3 +45,25 @@ class Hash_Table:
             if key == node.data.key:
                 return node.data.value
         return None
+
+    def __str__(self) -> str:
+        hash_table = "[ "
+        for index, data in enumerate(self.hash_table):
+            if data is not None:
+                hash_string = ""
+                node = data
+                if node.next_node:
+                    while node.next_node:
+                        hash_string += (str(node.data.key) + " : " + str(node.data.value) + " --> ")
+                        node.next_node
+                    hash_string += (str(node.data.key) + " : " + str(node.data.value) +  " --> None")
+                    hash_table += (f" [{index}] " +  hash_string)
+                else:
+                    hash_string = f" [{index}] {data.data.key} : {data.data.value} "
+                    hash_table += hash_string
+            else:
+                hash_table += f"[{index}] {data}"
+        return hash_table + " ]"
+
+
+
