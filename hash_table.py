@@ -19,3 +19,17 @@ class Hash_Table:
             hash_value += ord(i) #conversion to the interger representation of the unicode character
             hash_value = (hash_value * ord(i)) % self.table_size #add randomness to the value of the hash
         return hash_value
+
+    def add_key_value(self, key, value):
+        hash_key = self.custom_hash(key)
+        if self.hash_table[hash_key] is None:
+            self.hash_table[hash_key] = Node(Data(key,value), None)
+        else:
+            #If there's a collsion in our hash.
+            node = self.hash_table[hash_key]
+            while node.next_node:
+                node = node.next_node
+            node.next_node = Node(Data(key,value), None)
+
+    def get_value(self, key):
+        hash_key = self.custom_hash(key)
