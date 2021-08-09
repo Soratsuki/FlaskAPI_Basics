@@ -33,3 +33,15 @@ class Hash_Table:
 
     def get_value(self, key):
         hash_key = self.custom_hash(key)
+        if self.hash_table[hash_key] is not None:
+            node = self.hash_table[hash_key]
+            if node.next_node is None:
+                return node.data.value
+            while node.next_node:
+                if key == node.data.key:
+                    return node.data.value
+                node = node.next_node
+
+            if key == node.data.key:
+                return node.data.value
+        return None
