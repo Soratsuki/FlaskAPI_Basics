@@ -47,7 +47,7 @@ class Hash_Table:
         return None
 
     def __str__(self) -> str:
-        hash_table = "[ "
+        hash_table = ""
         for index, data in enumerate(self.hash_table):
             if data is not None:
                 hash_string = ""
@@ -55,15 +55,18 @@ class Hash_Table:
                 if node.next_node:
                     while node.next_node:
                         hash_string += (str(node.data.key) + " : " + str(node.data.value) + " --> ")
-                        node.next_node
-                    hash_string += (str(node.data.key) + " : " + str(node.data.value) +  " --> None")
-                    hash_table += (f" [{index}] " +  hash_string)
+                        node = node.next_node
+                    hash_string += (str(node.data.key) + " : " + str(node.data.value) +  " --> None ")
+                    hash_table += (f" \n[{index}] " +  hash_string )
                 else:
-                    hash_string = f" [{index}] {data.data.key} : {data.data.value} "
+                    hash_string = f" \n[{index}] {data.data.key} : {data.data.value} "
                     hash_table += hash_string
             else:
-                hash_table += f"[{index}] {data}"
-        return hash_table + " ]"
+                hash_table += f" \n[{index}] {data} "
+        return hash_table 
 
-
-
+# ht = Hash_Table(4)
+# ht.add_key_value("hi", "there")
+# ht.add_key_value("dog", "there")
+# ht.add_key_value("dog", "there")
+# print(ht)
